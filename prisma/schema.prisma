@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Poll {
+  id    Int    @id @default(autoincrement())
+  title String
+  author String
+  items Item[]
+}
+
+model Item {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  author      String
+  pollId      Int
+  votes       Vote[]
+  poll        Poll   @relation(fields: [pollId], references: [id])
+}
+
+model Vote {
+  id     Int    @id @default(autoincrement())
+  itemId Int
+  item   Item   @relation(fields: [itemId], references: [id])
+  userId String
+
+  @@unique([itemId, userId])
+}

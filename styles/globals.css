@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.my_class {
+  color: green;
+}
+
+.frame {
+  border: 1px solid #e9ebed;
+  padding: 10px;
+  margin-bottom: 10px;
+}
